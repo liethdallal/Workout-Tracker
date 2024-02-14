@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config();
+require('./connection/db')
 const PORT = process.env.PORT 
 const workoutRoutes = require('./routes/workoutsrouter')
 

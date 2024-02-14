@@ -1,3 +1,5 @@
+const Workout = require('../models/workoutModel')
+
 //GET all workouts
 function getAllWorkouts(req, res){
     res.json({mssg:'GET all workouts'})
@@ -9,9 +11,14 @@ function getOneWorkout(req,res){
 }
 
 // POST a new Workout 
-function postNewWorkout(req,res){
-    res.json({mssg: 'POST a workout'})
-
+async function postNewWorkout(req,res){
+    const {title, load, reps} = req.body
+    try{
+        const workout = await Workout.create({title, load, reps})
+        res.status(200).json(workout)
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 //DELETE a new Workout
